@@ -135,4 +135,137 @@
        
        ```
 
-     - 
+
+### Vue单文件组件
+
+#### Vue单文件组件的基本用法
+
+1. 单文件组件的组成结构
+
+   - template组件的模板区域
+
+   - script    业务逻辑区
+
+   - style      样式区域
+
+   - ```html
+     <!--基本结构-->
+     <template>
+     	<div>
+     		<h2>不跟你多bb</h2>
+     	</div>
+     </template>
+     
+     <script>
+     	export default {
+     		data() {
+     			return {}
+     		},
+     		methods: {}
+     	}
+     </script>
+     <!-- 尽量都加上scoped属性,避免样式名冲突 -->
+     <style scoped>
+     	h2 {
+     		color: #aa5;
+     	}
+     </style>
+     
+     ```
+
+   - 基本步骤
+
+     - ```shell
+       npm i vue-loader vue-template-compiler -d
+       #导入
+       import App from './components/App.vue'
+       #在webpack.config.js中配置
+       const VueLoaderPlugin = require('vue-loader/lib/plugin')
+       plugins: [htmlPlugin, new VueLoaderPlugin()],
+       #这是规则
+       { test: /\.vue$/, use: 'vue-loader' },
+       ```
+
+   - 在webpack下使用vue
+
+     - ```shell
+       npm i vue
+       #在index.js下导入
+       import Vue from 'vue'
+       import App from './components/App.vue'
+       const vm = new Vue ({
+       	el: '#app',
+       	data: {},
+       	render: h => h(App) #以后在webpack下都尽量用这个函数
+       })
+       
+       ```
+
+#### webpack打包与发布
+
+1. 在package.json下配置打包命令
+
+   - ```json
+     "build": "webpack -p"
+     ```
+
+### vue脚手架
+
+#### vue脚手架的基本用法
+
+1. 步骤
+
+   - ```shell
+     npm i -g @vue/cli
+     #检查 就是用vue -v
+     ```
+
+   - vue创建vue项目
+
+     - ```javascript
+       //交互式命令行
+       vue create my-project
+       //图形化界面
+       vue ui
+       ```
+
+   - 配置vue自定义
+
+     - ```javascript
+       module.exports = {
+       	devServer: {
+       		open: true,
+       		port: 8848
+       	}
+       }
+       也可以在package.json里面
+       ```
+
+### Element-UI
+
+#### 基本使用
+
+1. 基于命令行方式手动安装
+
+   - ```shell
+     npm i element-ui
+     ```
+
+   - 导入Element-UI相关资源
+
+     - ```javascript
+       // 手动配置ElementUI
+       import ElementUI from 'element-ui'
+       import 'element-ui/lib/theme-chalk/index.css'
+       Vue.use(ElementUI)
+       
+       ```
+
+2. 自动安装
+
+   - 运行 vue ui 打开图形化界面
+   - 通过vue项目管理器进入具体的项目配置面板
+   - 点击插件 ->添加插件,进入插件查询面板
+   - 搜索vue-cli-plugin-element并且安装
+   - 配置插件,实现按需导入,从而减少打包后项目的体积
+
