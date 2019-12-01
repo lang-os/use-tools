@@ -103,3 +103,22 @@
 
 - 
 
+## 创建分支
+
+- ```shell	
+  #创建
+  git checkout -b login
+  #查看
+  git branch
+  ```
+
+- ```shell
+  #在云端创建分支user
+  git push -u origin user
+  #将分支的代码合并到主分支
+  git merge user
+  #提交
+  git push
+  ```
+
+- 
